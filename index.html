@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>李迎 - 托管所教师个人主页</title>
+    <style>
+      body {
+        font-family: "Microsoft YaHei", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #faf6f1;
+        color: #333;
+      }
+
+      header {
+        background: linear-gradient(135deg, #f4c4c4 0%, #ffb6b9 100%);
+        color: #444;
+        text-align: center;
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5L35 25L55 30L35 35L30 55L25 35L5 30L25 25L30 5Z" fill="rgba(255,255,255,0.2)"/></svg>');
+        opacity: 0.3;
+        animation: floating 20s linear infinite;
+      }
+
+      @keyframes floating {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 100% 100%;
+        }
+      }
+
+      header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: inline-block;
+      }
+
+      header h1::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 2px;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+        position: relative;
+        display: inline-block;
+        padding: 0.5rem 2rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .profile-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .profile-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .daily-life {
+        background-color: #fff5f5;
+        padding: 2rem;
+        border-radius: 12px;
+        margin: 2rem 0;
+      }
+
+      .achievements {
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+      }
+
+      .quote {
+        font-style: italic;
+        color: #666;
+        border-left: 4px solid #f4c4c4;
+        padding-left: 1.5rem;
+        margin: 1.5rem 0;
+        font-size: 1.1rem;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .gallery-item {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline-item {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-left: 3px solid #f4c4c4;
+        position: relative;
+      }
+
+      .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-top: 2rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .btn {
+        background: #f4c4c4;
+        color: #444;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #ffb6b9;
+      }
+
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .skill-tag {
+        background: #fde2e2;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .profile-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      @media (max-width: 768px) {
+        .profile-header {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+        }
+
+        .profile-avatar {
+          width: 120px;
+          height: 120px;
+        }
+
+        .container {
+          padding: 1rem;
+        }
+
+        header {
+          padding: 2rem 1rem;
+        }
+
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        .skills {
+          justify-content: center;
+        }
+
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>李迎老师的个人主页</h1>
+      <p>用爱心托起每一个孩子的未来</p>
+      <div class="header-decoration"></div>
+    </header>
+
+    <div class="container">
+      <div class="profile-card">
+        <div class="profile-header">
+          <img src="touxiang.png" alt="李迎老师头像" class="profile-avatar" />
+          <div class="profile-info">
+            <h2>个人简介</h2>
+            <p>
+              李迎，1999年出生，现任托管所教师。毕业于华东师范大学教育学院，曾获得校级"优秀本科教师"荣誉称号。专注于儿童早期教育与课后辅导，拥有教师资格证和心理咨询师证书，致力于为孩子们创造快乐、高效的学习环境。
+            </p>
+          </div>
+        </div>
+        <div class="quote">
+          "每个孩子都是一颗闪耀的星星，我的责任就是让他们更加璀璨。教育不仅是传授知识，更是播种希望、培养品格的过程。"
+        </div>
+        <div class="skills">
+          <span class="skill-tag">儿童心理学</span>
+          <span class="skill-tag">趣味教学</span>
+          <span class="skill-tag">艺术启蒮</span>
+          <span class="skill-tag">习惯养成</span>
+          <span class="skill-tag">亲子教育</span>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
+            alt="作业辅导照片"
+          />
+          <p>课后作业辅导时间</p>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1484820540004-14229fe36ca4"
+            alt="午休看护照片"
+          />
+          <p>午休看护时光</p>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c67"
+            alt="晚餐准备照片"
+          />
+          <p>营养晚餐准备</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <h2>教育理念</h2>
+        <ul>
+          <li>以爱为基，用心呵护每个孩子的成长</li>
+          <li>因材施教，注重孩子的个性发展</li>
+          <li>寓教于乐，培养良好的学习习惯</li>
+          <li>激发兴趣，培养自主学习能力</li>
+          <li>建立信任，营造温暖的师生关系</li>
+        </ul>
+      </div>
+
+      <div class="daily-life">
+        <h2>托管工作日常</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>课业辅导</h3>
+            <p>针对性作业辅导，重点难点讲解，培养独立思考能力</p>
+          </div>
+          <div class="timeline-item">
+            <h3>特色课程</h3>
+            <p>开展美术、音乐、手工等兴趣课程，激发创造力</p>
+          </div>
+          <div class="timeline-item">
+            <h3>生活指导</h3>
+            <p>培养良好的生活习惯，注重礼仪教育</p>
+          </div>
+          <div class="timeline-item">
+            <h3>安全看护</h3>
+            <p>全方位关注学生安全，建立应急预案</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievements">
+        <h2>教学成果与荣誉</h2>
+        <ul>
+          <li>获得华东师范大学"优秀本科教师"荣誉称号</li>
+          <li>开发"童心绘世界"特色美术课程，深受学生喜爱</li>
+          <li>建立"悦读时光"班级图书角，培养学生阅读习惯</li>
+          <li>连续两年获得"最受欢迎教师"称号</li>
+          <li>成功举办多场亲子活动，促进家校互动</li>
+          <li>指导学生参加区级绘画比赛获得优异成绩</li>
+          <li>开发"快乐习惯养成"课程体系</li>
+        </ul>
+      </div>
+
+      <div class="contact-form">
+        <h2>联系我</h2>
+        <form>
+          <input type="text" placeholder="您的称呼" required />
+          <input type="email" placeholder="电子邮箱" required />
+          <textarea rows="4" placeholder="留言内容" required></textarea>
+          <button type="submit" class="btn">发送留言</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

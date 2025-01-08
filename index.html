@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>李迎 - 托管所教师个人主页</title>
+    <title>我的网站</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("WvxS9qsKKbXcBvBpE");
+      })();
+    </script>
     <style>
       body {
         font-family: "Microsoft YaHei", sans-serif;
@@ -208,6 +214,35 @@
         object-fit: cover;
         border: 4px solid white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .profile-avatar:hover {
+        transform: rotate(360deg);
+      }
+
+      /* 弹出层样式 */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      .modal img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
       }
 
       .profile-info {
@@ -350,13 +385,78 @@
 
       <div class="contact-form">
         <h2>联系我</h2>
-        <form>
+        <form id="contactForm" onsubmit="return sendMessage(event)">
           <input type="text" placeholder="您的称呼" required />
           <input type="email" placeholder="电子邮箱" required />
           <textarea rows="4" placeholder="留言内容" required></textarea>
           <button type="submit" class="btn">发送留言</button>
         </form>
+        <div id="messageStatus" style="margin-top: 1rem; display: none"></div>
       </div>
     </div>
+
+    <!-- 添加弹出层 -->
+    <div class="modal" id="avatarModal">
+      <img src="touxiang.png" alt="李迎老师头像" />
+    </div>
+
+    <script>
+      // 发送留言函数
+      async function sendMessage(event) {
+        event.preventDefault();
+
+        const form = document.getElementById("contactForm");
+        const status = document.getElementById("messageStatus");
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // 获取表单数据
+        const name = form.querySelector('input[type="text"]').value;
+        const email = form.querySelector('input[type="email"]').value;
+        const message = form.querySelector("textarea").value;
+
+        try {
+          submitButton.disabled = true;
+          status.style.display = "block";
+          status.textContent = "正在发送...";
+          status.style.color = "#666";
+
+          // 使用 EmailJS 发送邮件
+          await emailjs.send("service_uwql9yl", "template_pw8ns9c", {
+            from_name: name,
+            reply_to: email,
+            message: message,
+            to_email: "2496158900@qq.com",
+          });
+
+          // 发送成功
+          status.textContent = "发送成功！我们会尽快回复您。";
+          status.style.color = "#4caf50";
+          form.reset();
+        } catch (error) {
+          // 发送失败
+          status.textContent = "发送失败，请稍后重试或直接联系我们。";
+          status.style.color = "#f44336";
+          console.error("Error:", error);
+        } finally {
+          submitButton.disabled = false;
+        }
+
+        return false;
+      }
+
+      // 获取元素
+      const avatar = document.querySelector(".profile-avatar");
+      const modal = document.getElementById("avatarModal");
+
+      // 点击头像显示弹出层
+      avatar.addEventListener("click", () => {
+        modal.style.display = "block";
+      });
+
+      // 点击弹出层关闭
+      modal.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+    </script>
   </body>
 </html>

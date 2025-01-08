@@ -99,10 +99,13 @@
         margin-bottom: 2rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
+        perspective: 1000px;
+        transform-style: preserve-3d;
       }
 
       .profile-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
       }
 
       .daily-life {
@@ -390,6 +393,82 @@
         transition: width 0.3s;
         z-index: 1001;
       }
+
+      /* 页面切换动画 */
+      .page-transition {
+        animation: fadeInPage 0.5s ease-out;
+      }
+
+      @keyframes fadeInPage {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .gallery-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .gallery-preview img {
+        max-width: 90%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .typing-effect {
+        overflow: hidden;
+        border-right: 2px solid #f4c4c4;
+        white-space: nowrap;
+        margin: 0 auto;
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #f4c4c4;
+        }
+      }
+
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
@@ -399,12 +478,12 @@
     </div>
 
     <header>
-      <h1>李迎老师的个人主页</h1>
+      <h1 class="typing-effect">李迎老师的个人主页</h1>
       <p>用爱心托起每一个孩子的未来</p>
       <div class="header-decoration"></div>
     </header>
 
-    <div class="container">
+    <div class="container page-transition">
       <div class="profile-card">
         <div class="profile-header">
           <img src="touxiang.png" alt="李迎老师头像" class="profile-avatar" />
@@ -527,6 +606,10 @@
 
     <div id="backToTop" style="display: none">⇧</div>
 
+    <div class="gallery-preview" id="galleryPreview">
+      <img src="" alt="预览图片" />
+    </div>
+
     <script>
       // 发送留言函数
       async function sendMessage(event) {
@@ -631,6 +714,47 @@
       });
 
       images.forEach((img) => imageObserver.observe(img));
+
+      // 图片预览功能
+      const galleryImages = document.querySelectorAll(".gallery-item img");
+      const preview = document.getElementById("galleryPreview");
+      const previewImg = preview.querySelector("img");
+
+      galleryImages.forEach((img) => {
+        img.addEventListener("click", (e) => {
+          e.preventDefault();
+          previewImg.src = img.dataset.src || img.src;
+          preview.style.display = "flex";
+        });
+      });
+
+      preview.addEventListener("click", () => {
+        preview.style.display = "none";
+      });
+
+      // 页面滚动动画
+      const sections = document.querySelectorAll(
+        ".profile-card, .daily-life, .achievements"
+      );
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        section.classList.add("fade-in-section");
+        sectionObserver.observe(section);
+      });
     </script>
   </body>
 </html>

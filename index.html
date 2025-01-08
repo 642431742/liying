@@ -387,7 +387,12 @@
         <h2>联系我</h2>
         <form id="contactForm" onsubmit="return sendMessage(event)">
           <input type="text" placeholder="您的称呼" required />
-          <input type="email" placeholder="电子邮箱" required />
+          <input
+            type="tel"
+            placeholder="您的手机号码"
+            pattern="[0-9]{11}"
+            required
+          />
           <textarea rows="4" placeholder="留言内容" required></textarea>
           <button type="submit" class="btn">发送留言</button>
         </form>
@@ -411,7 +416,7 @@
 
         // 获取表单数据
         const name = form.querySelector('input[type="text"]').value;
-        const email = form.querySelector('input[type="email"]').value;
+        const phone = form.querySelector('input[type="tel"]').value;
         const message = form.querySelector("textarea").value;
 
         try {
@@ -423,7 +428,7 @@
           // 使用 EmailJS 发送邮件
           await emailjs.send("service_uwql9yl", "template_pw8ns9c", {
             from_name: name,
-            reply_to: email,
+            phone_number: phone,
             message: message,
             to_email: "2496158900@qq.com",
           });

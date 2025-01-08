@@ -469,9 +469,40 @@
         opacity: 1;
         transform: translateY(0);
       }
+
+      /* 樱花样式 */
+      .sakura {
+        position: fixed;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      @keyframes fall {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(100px, 100vh) rotate(360deg);
+        }
+      }
+
+      @keyframes sway {
+        0%,
+        100% {
+          margin-left: 0;
+        }
+        50% {
+          margin-left: 50px;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- 樱花容器 -->
+    <div id="sakura-container"></div>
+
     <div class="progress-bar" id="progressBar"></div>
     <div class="loading-screen">
       <div class="loader"></div>
@@ -755,6 +786,51 @@
         section.classList.add("fade-in-section");
         sectionObserver.observe(section);
       });
+
+      // 樱花飘落效果
+      function createSakura() {
+        const sakuraContainer = document.getElementById("sakura-container");
+        const sakura = document.createElement("div");
+        sakura.className = "sakura";
+
+        // 随机生成樱花的样式
+        const size = Math.random() * 15 + 10; // 10-25px
+        const startPositionX = Math.random() * window.innerWidth;
+        const fallDuration = Math.random() * 3 + 4; // 4-7秒
+        const swayDuration = Math.random() * 2 + 2; // 2-4秒
+
+        // 设置樱花的SVG
+        sakura.innerHTML = `
+          <svg width="${size}" height="${size}" viewBox="0 0 40 40">
+            <path fill="#ffd7e6" d="M20,0 C30,10 40,20 20,40 C0,20 10,10 20,0"/>
+          </svg>
+        `;
+
+        // 设置樱花的初始位置和动画
+        sakura.style.cssText = `
+          left: ${startPositionX}px;
+          top: -50px;
+          animation: 
+            fall ${fallDuration}s linear forwards,
+            sway ${swayDuration}s ease-in-out infinite;
+        `;
+
+        // 添加到容器中
+        sakuraContainer.appendChild(sakura);
+
+        // 动画结束后删除樱花
+        setTimeout(() => {
+          sakura.remove();
+        }, fallDuration * 1000);
+      }
+
+      // 定期创建新的樱花
+      function startSakura() {
+        setInterval(createSakura, 300); // 每300ms创建一个新樱花
+      }
+
+      // 页面加载完成后启动樱花效果
+      window.addEventListener("load", startSakura);
     </script>
   </body>
 </html>

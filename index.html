@@ -497,6 +497,37 @@
           margin-left: 50px;
         }
       }
+
+      .feature-link {
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 2rem;
+      }
+
+      .feature-button {
+        background: rgba(255, 255, 255, 0.2);
+        color: #444;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .feature-button .arrow {
+        transition: transform 0.3s ease;
+      }
+
+      .feature-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .feature-button:hover .arrow {
+        transform: translateX(5px);
+      }
     </style>
   </head>
   <body>
@@ -538,6 +569,15 @@
       </div>
 
       <div class="gallery">
+        <a href="parallax.html" class="gallery-item">
+          <img
+            src="placeholder.png"
+            data-src="https://images.unsplash.com/photo-1580582932707-520aed937b7b"
+            alt="托管所环境"
+            loading="lazy"
+          />
+          <p>托管所环境展示</p>
+        </a>
         <a href="homework.html" class="gallery-item">
           <img
             src="placeholder.png"

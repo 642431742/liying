@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>托管所环境 - 李迎老师的个人主页</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .parallax-container {
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        perspective: 10px;
+        scroll-behavior: smooth;
+      }
+
+      .parallax-section {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        transform-style: preserve-3d;
+        z-index: -1;
+      }
+
+      .background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transform: translateZ(-10px) scale(2);
+      }
+
+      .foreground {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transform: translateZ(-5px) scale(1.5);
+      }
+
+      .content {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transform: translateZ(0);
+        max-width: 600px;
+        backdrop-filter: blur(5px);
+      }
+
+      .content h2 {
+        color: #444;
+        margin-bottom: 1rem;
+      }
+
+      .content p {
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .normal-section {
+        position: relative;
+        background: white;
+        padding: 4rem 2rem;
+        z-index: 1;
+      }
+
+      .features {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: #fff5f5;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .back-link {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #444;
+        font-weight: bold;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .back-link:hover {
+        background: #f4c4c4;
+        transform: translateY(-2px);
+      }
+
+      .scroll-indicator {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        text-align: center;
+        animation: bounce 2s infinite;
+        z-index: 100;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        40% {
+          transform: translateY(-20px) translateX(-50%);
+        }
+        60% {
+          transform: translateY(-10px) translateX(-50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back-link">← 返回主页</a>
+
+    <div class="parallax-container">
+      <section class="parallax-section">
+        <img
+          src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66"
+          class="background"
+          alt="教室外景"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1580582932707-520aed937b7b"
+          class="foreground"
+          alt="教室内景"
+        />
+        <div class="content">
+          <h2>温馨舒适的学习环境</h2>
+          <p>
+            我们为孩子们精心打造了一个充满爱与关怀的学习空间，让每个孩子都能在这里快乐成长、安心学习。
+          </p>
+        </div>
+      </section>
+
+      <section class="normal-section">
+        <div class="features">
+          <div class="feature-card">
+            <h3>学习区域</h3>
+            <p>配备现代化教学设备，营造专注学习氛围</p>
+          </div>
+          <div class="feature-card">
+            <h3>休息区域</h3>
+            <p>舒适的午休环境，确保充分休息</p>
+          </div>
+          <div class="feature-card">
+            <h3>活动区域</h3>
+            <p>宽敞的活动空间，促进身心发展</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="parallax-section">
+        <img
+          src="https://img0.baidu.com/it/u=2160152990,9632440&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667"
+          class="background"
+          alt="学习场景"
+        />
+        <div class="content">
+          <h2>丰富多彩的课程活动</h2>
+          <p>
+            除了日常课业辅导，我们还开展各种特色课程和趣味活动，让孩子们在快乐中学习、在学习中成长。
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div class="scroll-indicator">
+      向下滚动查看更多
+      <br />
+      ↓
+    </div>
+  </body>
+</html>

@@ -11,6 +11,10 @@
       })();
     </script>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: "Microsoft YaHei", sans-serif;
         line-height: 1.6;
@@ -151,6 +155,12 @@
         height: 180px;
         object-fit: cover;
         border-radius: 6px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .gallery-item img.loaded {
+        opacity: 1;
       }
 
       .timeline {
@@ -179,6 +189,14 @@
         margin: 0.5rem 0;
         border: 1px solid #ddd;
         border-radius: 4px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        outline: none;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: #f4c4c4;
+        box-shadow: 0 0 0 3px rgba(244, 196, 196, 0.2);
       }
 
       .btn {
@@ -188,7 +206,14 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
       }
 
       .btn:hover {
@@ -290,9 +315,89 @@
           grid-template-columns: 1fr;
         }
       }
+
+      #backToTop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(244, 196, 196, 0.9);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        font-size: 20px;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      #backToTop:hover {
+        background: rgba(255, 182, 185, 0.95);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      #backToTop:active {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #f4c4c4;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* 进度条样式 */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(to right, #f4c4c4, #ffb6b9);
+        transition: width 0.3s;
+        z-index: 1001;
+      }
     </style>
   </head>
   <body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="loading-screen">
+      <div class="loader"></div>
+    </div>
+
     <header>
       <h1>李迎老师的个人主页</h1>
       <p>用爱心托起每一个孩子的未来</p>
@@ -316,7 +421,7 @@
         <div class="skills">
           <span class="skill-tag">儿童心理学</span>
           <span class="skill-tag">趣味教学</span>
-          <span class="skill-tag">艺术启蒮</span>
+          <span class="skill-tag">艺术启蒮蒮</span>
           <span class="skill-tag">习惯养成</span>
           <span class="skill-tag">亲子教育</span>
         </div>
@@ -325,22 +430,28 @@
       <div class="gallery">
         <a href="homework.html" class="gallery-item">
           <img
-            src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
+            src="placeholder.png"
+            data-src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
             alt="作业辅导照片"
+            loading="lazy"
           />
           <p>课后作业辅导时间</p>
         </a>
         <a href="rest.html" class="gallery-item">
           <img
-            src="https://images.unsplash.com/photo-1484820540004-14229fe36ca4"
+            src="placeholder.png"
+            data-src="https://images.unsplash.com/photo-1484820540004-14229fe36ca4"
             alt="午休看护照片"
+            loading="lazy"
           />
           <p>午休看护时光</p>
         </a>
         <a href="dinner.html" class="gallery-item">
           <img
-            src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c67"
+            src="placeholder.png"
+            data-src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c67"
             alt="晚餐准备照片"
+            loading="lazy"
           />
           <p>营养晚餐准备</p>
         </a>
@@ -414,6 +525,8 @@
       <img src="touxiang.png" alt="李迎老师头像" />
     </div>
 
+    <div id="backToTop" style="display: none">⇧</div>
+
     <script>
       // 发送留言函数
       async function sendMessage(event) {
@@ -471,6 +584,53 @@
       modal.addEventListener("click", () => {
         modal.style.display = "none";
       });
+
+      const backToTop = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTop.style.display = "block";
+        } else {
+          backToTop.style.display = "none";
+        }
+      });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("load", () => {
+        const loadingScreen = document.querySelector(".loading-screen");
+        loadingScreen.style.display = "none";
+      });
+
+      // 页面滚动进度
+      window.addEventListener("scroll", () => {
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+      });
+
+      // 图片懒加载优化
+      const images = document.querySelectorAll("img[data-src]");
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.onload = () => {
+              img.classList.add("loaded");
+              observer.unobserve(img);
+            };
+          }
+        });
+      });
+
+      images.forEach((img) => imageObserver.observe(img));
     </script>
   </body>
 </html>

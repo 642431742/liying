@@ -131,10 +131,19 @@
       }
 
       .gallery-item {
+        text-decoration: none;
+        color: inherit;
         background: #fff;
         padding: 1rem;
         border-radius: 8px;
         text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
       .gallery-item img {
@@ -314,27 +323,27 @@
       </div>
 
       <div class="gallery">
-        <div class="gallery-item">
+        <a href="homework.html" class="gallery-item">
           <img
             src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
             alt="作业辅导照片"
           />
           <p>课后作业辅导时间</p>
-        </div>
-        <div class="gallery-item">
+        </a>
+        <a href="rest.html" class="gallery-item">
           <img
             src="https://images.unsplash.com/photo-1484820540004-14229fe36ca4"
             alt="午休看护照片"
           />
           <p>午休看护时光</p>
-        </div>
-        <div class="gallery-item">
+        </a>
+        <a href="dinner.html" class="gallery-item">
           <img
             src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c67"
             alt="晚餐准备照片"
           />
           <p>营养晚餐准备</p>
-        </div>
+        </a>
       </div>
 
       <div class="profile-card">

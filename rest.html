@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>午休看护 - 李迎老师的个人主页</title>
+    <style>
+      body {
+        font-family: "Microsoft YaHei", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #faf6f1;
+        color: #333;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: #666;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #f4c4c4;
+      }
+
+      .content-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .care-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .care-item {
+        background: #fff5f5;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .environment {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: #fff5f5;
+        border-radius: 8px;
+      }
+
+      .environment-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .environment-list li {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .environment-list li::before {
+        content: "•";
+        color: #f4c4c4;
+        position: absolute;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link">← 返回主页</a>
+
+      <div class="content-card">
+        <h1>午休看护时光</h1>
+        <p>
+          为孩子们提供舒适、安静的午休环境，确保他们得到充分的休息，以饱满的精神迎接下午的学习。
+        </p>
+
+        <h2>看护内容</h2>
+        <div class="care-items">
+          <div class="care-item">
+            <h3>环境准备</h3>
+            <p>调节室温、通风、光线，营造舒适的休息环境</p>
+          </div>
+          <div class="care-item">
+            <h3>安全守护</h3>
+            <p>全程陪护，确保孩子们安全、安心地休息</p>
+          </div>
+          <div class="care-item">
+            <h3>个性关怀</h3>
+            <p>关注每个孩子的休息情况，适时调整</p>
+          </div>
+        </div>
+
+        <div class="environment">
+          <h2>休息环境保障</h2>
+          <ul class="environment-list">
+            <li>配备舒适的午休床具和被褥</li>
+            <li>保持室内适宜温度（夏季26℃，冬季20℃）</li>
+            <li>安装空气净化器，确保空气清新</li>
+            <li>使用遮光窗帘，营造适宜光线</li>
+            <li>播放轻柔的白噪音，帮助入睡</li>
+          </ul>
+        </div>
+
+        <h2>时间安排</h2>
+        <div class="care-items">
+          <div class="care-item">
+            <h3>12:30-12:45</h3>
+            <p>午餐后休息、准备</p>
+          </div>
+          <div class="care-item">
+            <h3>12:45-14:15</h3>
+            <p>安静午休时间</p>
+          </div>
+          <div class="care-item">
+            <h3>14:15-14:30</h3>
+            <p>起床整理、精神唤醒</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

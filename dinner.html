@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>营养晚餐 - 李迎老师的个人主页</title>
+    <style>
+      body {
+        font-family: "Microsoft YaHei", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #faf6f1;
+        color: #333;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: #666;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #f4c4c4;
+      }
+
+      .content-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .menu-item {
+        background: #fff5f5;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .principles {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: #fff5f5;
+        border-radius: 8px;
+      }
+
+      .principles-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .principles-list li {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .principles-list li::before {
+        content: "•";
+        color: #f4c4c4;
+        position: absolute;
+        left: 0;
+      }
+
+      .schedule {
+        display: grid;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .schedule-item {
+        background: #fff5f5;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link">← 返回主页</a>
+
+      <div class="content-card">
+        <h1>营养晚餐准备</h1>
+        <p>
+          为孩子们精心准备营养均衡的晚餐，让每个孩子都能享受到可口的饭菜，补充学习所需的能量。
+        </p>
+
+        <h2>每周菜单示例</h2>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <h3>星期一</h3>
+            <p>清炒时蔬</p>
+            <p>红烧肉</p>
+            <p>番茄蛋汤</p>
+            <p>米饭/馒头</p>
+          </div>
+          <div class="menu-item">
+            <h3>星期二</h3>
+            <p>炒青菜</p>
+            <p>糖醋排骨</p>
+            <p>紫菜蛋花汤</p>
+            <p>米饭/馒头</p>
+          </div>
+          <div class="menu-item">
+            <h3>星期三</h3>
+            <p>上海青</p>
+            <p>鱼香肉丝</p>
+            <p>玉米排骨汤</p>
+            <p>米饭/馒头</p>
+          </div>
+        </div>
+
+        <div class="principles">
+          <h2>营养原则</h2>
+          <ul class="principles-list">
+            <li>注重营养均衡，荤素搭配</li>
+            <li>选用新鲜食材，确保食品安全</li>
+            <li>适量调味，培养健康饮食习惯</li>
+            <li>定期更换菜单，保持饮食多样性</li>
+            <li>考虑孩子们的喜好，适当调整</li>
+          </ul>
+        </div>
+
+        <h2>用餐时间安排</h2>
+        <div class="schedule">
+          <div class="schedule-item">
+            <h3>17:30-17:40</h3>
+            <p>餐前准备和洗手</p>
+          </div>
+          <div class="schedule-item">
+            <h3>17:40-18:10</h3>
+            <p>享用晚餐时间</p>
+          </div>
+          <div class="schedule-item">
+            <h3>18:10-18:20</h3>
+            <p>餐后整理和休息</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

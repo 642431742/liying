@@ -787,21 +787,21 @@
       images.forEach((img) => imageObserver.observe(img));
 
       // 图片预览功能
-      const galleryImages = document.querySelectorAll(".gallery-item img");
-      const preview = document.getElementById("galleryPreview");
-      const previewImg = preview.querySelector("img");
+      // const galleryImages = document.querySelectorAll(".gallery-item img");
+      // const preview = document.getElementById("galleryPreview");
+      // const previewImg = preview.querySelector("img");
 
-      galleryImages.forEach((img) => {
-        img.addEventListener("click", (e) => {
-          e.preventDefault();
-          previewImg.src = img.dataset.src || img.src;
-          preview.style.display = "flex";
-        });
-      });
+      // galleryImages.forEach((img) => {
+      //   img.addEventListener("click", (e) => {
+      //     e.preventDefault();
+      //     previewImg.src = img.dataset.src || img.src;
+      //     preview.style.display = "flex";
+      //   });
+      // });
 
-      preview.addEventListener("click", () => {
-        preview.style.display = "none";
-      });
+      // preview.addEventListener("click", () => {
+      //   preview.style.display = "none";
+      // });
 
       // 页面滚动动画
       const sections = document.querySelectorAll(
